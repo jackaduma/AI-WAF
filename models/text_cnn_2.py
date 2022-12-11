@@ -5,7 +5,7 @@
 '''
 Author: Kun
 Date: 2022-12-11 11:41:58
-LastEditTime: 2022-12-11 13:29:03
+LastEditTime: 2022-12-11 16:11:24
 LastEditors: Kun
 Description: 
 FilePath: /AI-WAF/models/text_cnn_2.py
@@ -23,7 +23,7 @@ from config import inputLen
 
 
 def textcnn2(tokenizer, class_num=2):
-    kernel_size = [1, 3, 5, 7, 9, 11, 13]
+    kernel_size = [3, 5, 7, 9, 11]
     acti = 'relu'
     my_input = Input(shape=(inputLen,), dtype='int32')
     emb = Embedding(len(tokenizer.word_index) + 1, 128,

@@ -5,7 +5,7 @@
 '''
 Author: Kun
 Date: 2022-05-05 14:57:22
-LastEditTime: 2022-12-11 15:21:16
+LastEditTime: 2022-12-11 16:11:03
 LastEditors: Kun
 Description: 
 FilePath: /AI-WAF/models/text_cnn_1.py
@@ -22,7 +22,7 @@ from tensorflow.keras.regularizers import l2
 from config import inputLen
 
 def textcnn1(tokenizer, class_num=2):
-    kernel_size = [1, 3, 3, 5, 5]
+    kernel_size = [1, 3, 5]
     acti = 'relu'
     my_input = Input(shape=(inputLen,), dtype='int32')
     emb = Embedding(len(tokenizer.word_index) + 1, 20,
