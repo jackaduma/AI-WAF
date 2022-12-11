@@ -5,7 +5,7 @@
 '''
 Author: Kun
 Date: 2022-12-11 11:42:07
-LastEditTime: 2022-12-11 13:29:17
+LastEditTime: 2022-12-11 15:20:46
 LastEditors: Kun
 Description: 
 FilePath: /AI-WAF/models/text_cnn_3.py
@@ -22,27 +22,8 @@ from config import inputLen
 
 ########################################################################
 
+
 def textcnn3(tokenizer, class_num=2):
-    kernel_size = [2, 3, 4]
-    acti = 'relu'
-    my_input = Input(shape=(inputLen,), dtype='int32')
-    emb = Embedding(len(tokenizer.word_index)+1, 128,
-                    input_length=inputLen)(my_input)
-
-    net = []
-    for kernel in kernel_size:
-        # 32个卷积核
-        con = Conv1D(512, kernel, activation=acti, padding="same")(emb)
-        net.append(con)
-    net = concatenate(net, axis=1)
-    # net = concatenate(net)
-    net = Flatten()(net)
-    net = Dropout(0.5)(net)
-    net = Dense(class_num, activation='softmax')(net)
-    model = Model(inputs=my_input, outputs=net)
-    return model
-
-def textcnn3_with_l2(tokenizer, class_num=2):
     kernel_size = [2, 3, 4]
     acti = 'relu'
     my_input = Input(shape=(inputLen,), dtype='int32')

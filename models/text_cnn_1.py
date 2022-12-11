@@ -5,7 +5,7 @@
 '''
 Author: Kun
 Date: 2022-05-05 14:57:22
-LastEditTime: 2022-12-11 13:28:37
+LastEditTime: 2022-12-11 15:21:16
 LastEditors: Kun
 Description: 
 FilePath: /AI-WAF/models/text_cnn_1.py
@@ -31,7 +31,7 @@ def textcnn1(tokenizer, class_num=2):
 
     net = []
     for kernel in kernel_size:
-        con = Conv1D(32, kernel, activation=acti, padding="same")(emb)
+        con = Conv1D(32, kernel, activation=acti, padding="same", kernel_regularizer=l2(0.0005))(emb)
         con = MaxPool1D(2)(con)
         net.append(con)
     net = concatenate(net, axis=-1)
@@ -40,7 +40,7 @@ def textcnn1(tokenizer, class_num=2):
     net = Dropout(0.5)(net)
     net = Dense(256, activation='relu')(net)
     net = Dropout(0.5)(net)
-    net = Dense(class_num, activation='softmax')(net)
+    net = Dense(class_num, activation='softmax', kernel_regularizer=l2(l=0.001))(net)
     model = Model(inputs=my_input, outputs=net)
     return model
 
